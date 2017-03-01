@@ -19,8 +19,8 @@ public class ExtremeShapelessRecipeWrapper extends BlankRecipeWrapper {
     public ExtremeShapelessRecipeWrapper(ExtremeShapelessRecipe recipe) {
         this.recipe = recipe;
         for (ItemStack itemStack : this.recipe.recipeItems) {
-            if (itemStack != null && itemStack.stackSize != 1) {
-                itemStack.stackSize = 1;
+            if (itemStack.isEmpty() && itemStack.getCount() != 1) {
+                itemStack.setCount(1);
             }
         }
     }
