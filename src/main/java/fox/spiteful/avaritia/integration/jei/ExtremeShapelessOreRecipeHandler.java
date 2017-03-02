@@ -25,11 +25,6 @@ public class ExtremeShapelessOreRecipeHandler implements IRecipeHandler<ExtremeS
     }
 
     @Override
-    public String getRecipeCategoryUid() {
-        return RecipeCategoryUids.EXTREME_CRAFTING;
-    }
-
-    @Override
     public String getRecipeCategoryUid(ExtremeShapelessOreRecipe extremeShapedRecipe) {
         return RecipeCategoryUids.EXTREME_CRAFTING;
     }

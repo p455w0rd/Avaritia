@@ -1,7 +1,6 @@
 package fox.spiteful.avaritia.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +9,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class TileEntityDireCrafting extends TileLudicrous implements IInventory, ISidedInventory{
+public class TileEntityDireCrafting extends TileLudicrous implements ISidedInventory{
 
     private ItemStack result;
     private ItemStack[] matrix = new ItemStack[81];
@@ -22,11 +21,25 @@ public class TileEntityDireCrafting extends TileLudicrous implements IInventory,
     }*/
 
     @Override
+    public boolean isEmpty()
+    {
+        for (ItemStack itemstack : this.matrix)
+        {
+            if (!itemstack.isEmpty())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    @Override
     public void readCustomNBT(NBTTagCompound tag)
     {
-        this.result = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Result"));
+        this.result = new ItemStack(tag.getCompoundTag("Result"));
         for(int x = 0;x < matrix.length;x++){
-            matrix[x] = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("Craft" + x));
+            matrix[x] = new ItemStack(tag.getCompoundTag("Craft" + x));
         }
     }
 
@@ -76,13 +89,13 @@ public class TileEntityDireCrafting extends TileLudicrous implements IInventory,
                 for(int x = 1;x <= matrix.length;x++){
                     decrStackSize(x, 1);
                 }
-                if(result.stackSize <= decrement) {
+                if(result.getCount() <= decrement) {
                     ItemStack craft = result;
                     result = null;
                     return craft;
                 }
                 ItemStack split = result.splitStack(decrement);
-                if(result.stackSize <= 0){
+                if(result.getCount() <= 0){
                     result = null;
                 }
                 return split;
@@ -92,13 +105,13 @@ public class TileEntityDireCrafting extends TileLudicrous implements IInventory,
         }
         else if(slot <= matrix.length){
             if(matrix[slot - 1] != null){
-                if(matrix[slot - 1].stackSize <= decrement){
+                if(matrix[slot - 1].getCount() <= decrement){
                     ItemStack ingredient = matrix[slot - 1];
                     matrix[slot - 1] = null;
                     return ingredient;
                 }
                 ItemStack split = matrix[slot - 1].splitStack(decrement);
-                if(matrix[slot - 1].stackSize <= 0){
+                if(matrix[slot - 1].getCount() <= 0){
                     matrix[slot - 1] = null;
                 }
                 return split;
@@ -139,9 +152,9 @@ public class TileEntityDireCrafting extends TileLudicrous implements IInventory,
     public void closeInventory(EntityPlayer player) {}
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player)
+    public boolean isUsableByPlayer(EntityPlayer player)
     {
-        return this.worldObj.getTileEntity(pos) == this && player.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;
+        return this.getWorld().getTileEntity(pos) == this && player.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override

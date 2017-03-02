@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Level;
 
-@Mod(modid = "Avaritia", name = "Avaritia")
+@Mod(modid = "avaritia", name = "Avaritia")
 public class Avaritia {
     @Mod.Instance
     public static Avaritia instance;
@@ -35,8 +35,9 @@ public class Avaritia {
     public static CreativeTabs tab = new CreativeTabs("avaritia"){
         @Override
         @SideOnly(Side.CLIENT)
-        public Item getTabIconItem(){
-            return matrixIngot;
+        public ItemStack getTabIconItem(){
+            return new ItemStack(matrixIngot);
+
         }
     };
 

@@ -20,7 +20,7 @@ public class ExtremeShapedRecipeWrapper extends BlankRecipeWrapper {
     public ExtremeShapedRecipeWrapper(ExtremeShapedRecipe recipe) {
         this.recipe = recipe;
         for (ItemStack itemStack : this.recipe.recipeItems) {
-            if (ItemStack.isEmpty() && itemStack.getCount() != 1) {
+            if (itemStack.isEmpty() && itemStack.getCount() != 1) {
                 itemStack.setCount(1);
             }
         }

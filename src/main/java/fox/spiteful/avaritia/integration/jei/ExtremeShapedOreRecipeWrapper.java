@@ -41,7 +41,7 @@ public class ExtremeShapedOreRecipeWrapper extends BlankRecipeWrapper {
         try {
             List<List<ItemStack>> inputs = stackHelper.expandRecipeItemStackInputs(Arrays.asList(recipe.getInput()));
             ingredients.setInputLists(ItemStack.class, inputs);
-            if (recipeOutput != null) {
+            if (!recipeOutput.isEmpty()) {
                 ingredients.setOutput(ItemStack.class, recipeOutput);
             }
         } catch (RuntimeException e) {

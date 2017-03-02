@@ -16,12 +16,6 @@ public class ExtremeShapedRecipeHandler implements IRecipeHandler<ExtremeShapedR
         return ExtremeShapedRecipe.class;
     }
 
-    @SuppressWarnings("all")
-    @Override
-    public String getRecipeCategoryUid() {
-        return RecipeCategoryUids.EXTREME_CRAFTING;
-    }
-
     @Override
     public String getRecipeCategoryUid(ExtremeShapedRecipe extremeShapedRecipe) {
         return RecipeCategoryUids.EXTREME_CRAFTING;

@@ -17,11 +17,6 @@ public class ExtremeShelessRecipeHandler implements IRecipeHandler<ExtremeShapel
     }
 
     @Override
-    public String getRecipeCategoryUid() {
-        return RecipeCategoryUids.EXTREME_CRAFTING;
-    }
-
-    @Override
     public String getRecipeCategoryUid(ExtremeShapelessRecipe extremeShapedRecipe) {
         return RecipeCategoryUids.EXTREME_CRAFTING;
     }

@@ -1,13 +1,16 @@
 package fox.spiteful.avaritia.crafting;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -175,7 +178,7 @@ public class ExtremeCraftingManager {
         }
 
         //This seems to be for "Repair" / combining recipes
-        if (numFound == 2 && firstStackFound.getItem() == secondStackFound.getItem() && firstStackFound.stackSize == 1 && secondStackFound.stackSize == 1 && firstStackFound.getItem().isRepairable())
+        if (numFound == 2 && firstStackFound.getItem() == secondStackFound.getItem() && firstStackFound.getCount() == 1 && secondStackFound.getCount() == 1 && firstStackFound.getItem().isRepairable())
         {
             Item item = firstStackFound.getItem();
             int j1 = item.getMaxDamage() - firstStackFound.getItemDamage();
@@ -206,7 +209,7 @@ public class ExtremeCraftingManager {
         }
     }
 
-    public ItemStack[] getRemainingItems(InventoryCrafting craftMatrix, World worldIn)
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting craftMatrix, World worldIn)
     {
         for (IRecipe irecipe : this.recipes)
         {
@@ -216,11 +219,12 @@ public class ExtremeCraftingManager {
             }
         }
 
-        ItemStack[] aitemstack = new ItemStack[craftMatrix.getSizeInventory()];
+        NonNullList<ItemStack> aitemstack = NonNullList.<ItemStack>withSize(craftMatrix.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < aitemstack.length; ++i)
+        for (int i = 0; i < aitemstack .size(); ++i)
         {
-            aitemstack[i] = craftMatrix.getStackInSlot(i);
+            ItemStack itemstack = craftMatrix.getStackInSlot(i);
+            aitemstack.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
         }
 
         return aitemstack;

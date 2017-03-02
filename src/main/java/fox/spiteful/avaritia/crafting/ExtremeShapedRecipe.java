@@ -3,6 +3,7 @@ package fox.spiteful.avaritia.crafting;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -81,9 +82,9 @@ public class ExtremeShapedRecipe implements IRecipe
 
                 ItemStack itemstack1 = matrix.getStackInRowAndColumn(k, l);
 
-                if (itemstack1 != null || itemstack != null)
+                if (!itemstack1.isEmpty() || !itemstack.isEmpty())
                 {
-                    if (itemstack1 == null && itemstack != null || itemstack1 != null && itemstack == null)
+                    if (itemstack1.isEmpty() && !itemstack.isEmpty() || !itemstack1.isEmpty() && itemstack.isEmpty())
                     {
                         return false;
                     }
@@ -122,7 +123,7 @@ public class ExtremeShapedRecipe implements IRecipe
     }
 
     @Override
-    public ItemStack[] getRemainingItems(InventoryCrafting inv) //getRecipeLeftovers
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) //getRecipeLeftovers
     {
         return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }

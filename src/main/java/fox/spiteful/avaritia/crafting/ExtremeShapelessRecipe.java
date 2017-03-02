@@ -3,6 +3,7 @@ package fox.spiteful.avaritia.crafting;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -33,7 +34,7 @@ public class ExtremeShapelessRecipe implements IRecipe
      */
     public boolean matches(InventoryCrafting matrix, World world)
     {
-        ArrayList arraylist = new ArrayList(this.recipeItems);
+        ArrayList arraylist = new ArrayList<ItemStack>(this.recipeItems);
 
         for (int i = 0; i < 9; ++i)
         {
@@ -41,7 +42,7 @@ public class ExtremeShapelessRecipe implements IRecipe
             {
                 ItemStack itemstack = matrix.getStackInRowAndColumn(j, i);
 
-                if (itemstack != null)
+                if (!itemstack.isEmpty())
                 {
                     boolean flag = false;
                     Iterator iterator = arraylist.iterator();
@@ -86,7 +87,7 @@ public class ExtremeShapelessRecipe implements IRecipe
     }
 
     @Override
-    public ItemStack[] getRemainingItems(InventoryCrafting inv) //getRecipeLeftovers
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) //getRecipeLeftovers
     {
         return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }

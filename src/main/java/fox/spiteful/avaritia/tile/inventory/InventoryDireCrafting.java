@@ -49,7 +49,7 @@ public class InventoryDireCrafting extends InventoryCrafting {
         if (stack != null)
         {
             ItemStack itemstack;
-            if (stack.stackSize <= decrement)
+            if (stack.getCount() <= decrement)
             {
                 itemstack = stack.copy();
                 craft.setInventorySlotContents(slot + 1, null);
@@ -59,7 +59,7 @@ public class InventoryDireCrafting extends InventoryCrafting {
             else
             {
                 itemstack = stack.splitStack(decrement);
-                if (stack.stackSize == 0)
+                if (stack.getCount() == 0)
                 {
                     craft.setInventorySlotContents(slot + 1, null);
                 }

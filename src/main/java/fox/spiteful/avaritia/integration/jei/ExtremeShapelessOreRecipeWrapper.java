@@ -27,7 +27,7 @@ public class ExtremeShapelessOreRecipeWrapper extends BlankRecipeWrapper {
             if (input instanceof ItemStack) {
                 ItemStack itemStack = (ItemStack) input;
                 if (itemStack.getCount() != 1) {
-                    itemStack.setCount() = 1;
+                    itemStack.setCount(1);
                 }
             }
         }
@@ -41,7 +41,7 @@ public class ExtremeShapelessOreRecipeWrapper extends BlankRecipeWrapper {
         try {
             List<List<ItemStack>> inputs = stackHelper.expandRecipeItemStackInputs(recipe.getInput());
             ingredients.setInputLists(ItemStack.class, inputs);
-            if (recipeOutput != null) {
+            if (!recipeOutput.isEmpty()) {
                 ingredients.setOutput(ItemStack.class, recipeOutput);
             }
         } catch (RuntimeException e) {

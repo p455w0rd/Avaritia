@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockDireCrafting extends BlockContainer {
-    private Random randy = new Random();
+
 
     public BlockDireCrafting(){
         super(Material.IRON);
@@ -31,7 +31,7 @@ public class BlockDireCrafting extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (world.isRemote)
         {
